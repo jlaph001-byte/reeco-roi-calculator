@@ -842,6 +842,11 @@
             <input type="text" id="f-contact" placeholder="e.g. Maria Lopez, VP Operations">
           </div>
         </div>
+        <div class="field-group">
+          <label>Your email address</label>
+          <input type="email" id="f-email" placeholder="e.g. maria@sunrisehotels.com">
+          <div class="field-hint">Used to follow up with your personalized ROI summary</div>
+        </div>
         <div class="field-row">
           <div class="field-group">
             <label>Number of properties</label>
@@ -1389,12 +1394,88 @@ function fmtNum(num) {
   return Math.round(num).toLocaleString();
 }
 
+function submitToHubSpot() {
+  const portalId = '244327008';
+  const formId = 'de92905b-3ff1-48be-a470-7f1982a96e18';
+  const endpoint = `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formId}`;
+
+  const contactName = v('f-contact') || '';
+  const nameParts = contactName.split(' ');
+  const firstName = nameParts[0] || '';
+  const lastName = nameParts.slice(1).join(' ') || '';
+
+  const payload = {
+    fields: [
+      { objectTypeId: '0-1', name: 'firstname', value: firstName },
+      { objectTypeId: '0-1', name: 'lastname', value: lastName },
+      { objectTypeId: '0-1', name: 'company', value: v('f-name') || '' },
+      { objectTypeId: '0-1', name: 'email', value: v('f-email') || `noemail+${Date.now()}@reeco-roi.demo` },
+      { objectTypeId: '0-1', name: 'jobtitle', value: v('f-contact') || '' },
+      { objectTypeId: '0-1', name: 'numemployees', value: v('f-properties') || '' },
+      { objectTypeId: '0-1', name: 'message', value:
+          `Properties: ${v('f-properties')} | ` +
+          `Rooms: ${v('f-rooms')} | ` +
+          `Current system: ${v('f-current-system')} | ` +
+          `Invoices/mo: ${v('f-invoices')} | ` +
+          `AP staff: ${v('f-ap-staff')} | ` +
+          `AP wage: ${v('f-ap-wage')} | ` +
+          `Annual spend: ${v('f-spend')} | ` +
+          `Order hrs/wk: ${v('f-order-hours')} | ` +
+          `Vendors: ${v('f-vendors')} | ` +
+          `Inv hours/count: ${v('f-inv-hours')} | ` +
+          `Inv wage: ${v('f-inv-wage')} | ` +
+          `Inv freq: ${radioVal('inv-freq')} | ` +
+          `F&B revenue: ${v('f-fb-revenue')} | ` +
+          `Food cost %: ${v('f-food-cost')} | ` +
+          `Recipe tracking: ${v('f-recipe-tracking')} | ` +
+          `Chef visibility: ${radioVal('chef-vis')} | ` +
+          `Stockouts: ${radioVal('stockout')} | ` +
+          `AP capacity: ${radioVal('ap-cap')}`
+      }
+    ],
+    context: {
+      pageUri: window.location.href,
+      pageName: 'Reeco ROI Calculator'
+    }
+  };
+
+  fetch(endpoint, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  })
+  .then(res => {
+    if (res.ok) showToast('✓ Data saved to HubSpot CRM', 'success');
+    else showToast('HubSpot sync failed — check console', 'error');
+  })
+  .catch(() => showToast('HubSpot sync failed — check connection', 'error'));
+}
+
+function showToast(message, type) {
+  const existing = document.getElementById('hs-toast');
+  if (existing) existing.remove();
+  const toast = document.createElement('div');
+  toast.id = 'hs-toast';
+  toast.textContent = message;
+  toast.style.cssText = `
+    position: fixed; bottom: 24px; right: 24px; z-index: 9999;
+    background: ${type === 'success' ? '#1B7A42' : '#A32D2D'};
+    color: white; padding: 12px 20px; border-radius: 8px;
+    font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    animation: slideIn 0.3s ease;
+  `;
+  document.body.appendChild(toast);
+  setTimeout(() => { if (toast.parentNode) toast.remove(); }, 4000);
+}
+
 function showResults() {
   document.getElementById('screen-form').classList.remove('active');
   document.getElementById('screen-results').classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
   populateResults();
   recalc();
+  submitToHubSpot();
 }
 
 function populateResults() {
