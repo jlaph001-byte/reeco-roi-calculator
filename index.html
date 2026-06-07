@@ -1395,72 +1395,65 @@ function fmtNum(num) {
 }
 
 function submitToHubSpot() {
-  const token = 'pat-na2-791da0a7-48dd-4855-aa05-34ddbc8c0421';
-  const endpoint = 'https://api.hubapi.com/crm/v3/objects/contacts';
+  const portalId = '244327008';
+  const formId = 'de92905b-3ff1-48be-a470-7f1982a96e18';
+  const endpoint = 'https://api.hsforms.com/submissions/v3/integration/submit/' + portalId + '/' + formId;
 
   const contactName = v('f-contact') || '';
   const nameParts = contactName.split(' ');
   const firstName = nameParts[0] || 'Unknown';
-  const lastName = nameParts.slice(1).join(' ') || 'Unknown';
+  const lastName = nameParts.slice(1).join(' ') || '';
   const email = v('f-email') || ('roi-demo-' + Date.now() + '@reeco-calc.io');
 
   const invFreqLabel = {'52':'Weekly','26':'Bi-weekly','12':'Monthly'}[radioVal('inv-freq')] || '';
   const systemLabel = {excel:'Excel/spreadsheets',portals:'Multiple vendor portals',email:'Email & phone',software:'Existing software',mix:'Mix of methods'}[v('f-current-system')] || '';
 
-  const roiNote =
-    '=== REECO ROI ASSESSMENT ===\n' +
-    'Property Group: ' + v('f-name') + '\n' +
-    'Contact: ' + v('f-contact') + '\n' +
-    'Properties: ' + v('f-properties') + ' | Avg rooms: ' + v('f-rooms') + '\n' +
-    'Current system: ' + systemLabel + '\n\n' +
-    '--- AP AUTOMATION ---\n' +
-    'Invoices/month: ' + v('f-invoices') + '\n' +
-    'AP staff: ' + v('f-ap-staff') + ' people\n' +
-    'AP hourly wage: $' + (v('f-ap-wage') || '22') + '/hr\n' +
-    'AP capacity issue: ' + radioVal('ap-cap') + '\n\n' +
-    '--- PURCHASING ---\n' +
-    'Annual supply spend: $' + v('f-spend') + '\n' +
-    'Order hours/week: ' + v('f-order-hours') + '\n' +
-    'Active vendors: ' + v('f-vendors') + '\n' +
-    'Stockout frequency: ' + radioVal('stockout') + '\n\n' +
-    '--- INVENTORY ---\n' +
-    'Count frequency: ' + invFreqLabel + '\n' +
-    'Hours per count: ' + v('f-inv-hours') + '\n' +
-    'Inventory staff wage: $' + (v('f-inv-wage') || '18') + '/hr\n\n' +
-    '--- FOOD COST ---\n' +
-    'Annual F&B revenue: $' + v('f-fb-revenue') + '\n' +
-    'Current food cost %: ' + (v('f-food-cost') || '32') + '%\n' +
-    'Recipe tracking: ' + v('f-recipe-tracking') + '\n' +
-    'Chef price visibility: ' + radioVal('chef-vis');
+  const roiMessage =
+    'Properties: ' + v('f-properties') + ' | ' +
+    'Rooms: ' + v('f-rooms') + ' | ' +
+    'Current system: ' + systemLabel + ' | ' +
+    'Invoices/mo: ' + v('f-invoices') + ' | ' +
+    'AP staff: ' + v('f-ap-staff') + ' | ' +
+    'AP wage: ' + (v('f-ap-wage') || '22') + ' | ' +
+    'AP capacity: ' + radioVal('ap-cap') + ' | ' +
+    'Annual spend: ' + v('f-spend') + ' | ' +
+    'Order hrs/wk: ' + v('f-order-hours') + ' | ' +
+    'Vendors: ' + v('f-vendors') + ' | ' +
+    'Stockouts: ' + radioVal('stockout') + ' | ' +
+    'Inv hours/count: ' + v('f-inv-hours') + ' | ' +
+    'Inv wage: ' + (v('f-inv-wage') || '18') + ' | ' +
+    'Inv freq: ' + invFreqLabel + ' | ' +
+    'F&B revenue: ' + v('f-fb-revenue') + ' | ' +
+    'Food cost %: ' + (v('f-food-cost') || '32') + ' | ' +
+    'Recipe tracking: ' + v('f-recipe-tracking') + ' | ' +
+    'Chef visibility: ' + radioVal('chef-vis');
 
   const payload = {
-    properties: {
-      firstname: firstName,
-      lastname: lastName,
-      email: email,
-      company: v('f-name') || '',
-      jobtitle: v('f-contact') || '',
-      hs_lead_status: 'NEW',
-      lifecyclestage: 'lead',
-      description: roiNote
+    fields: [
+      { name: 'firstname', value: firstName },
+      { name: 'lastname', value: lastName },
+      { name: 'email', value: email },
+      { name: 'company', value: v('f-name') || '' },
+      { name: 'jobtitle', value: v('f-contact') || '' },
+      { name: 'message', value: roiMessage }
+    ],
+    context: {
+      pageUri: 'jlaph001-byte.github.io/reeco-roi-calculator',
+      pageName: 'Reeco ROI Calculator'
     }
   };
 
   fetch(endpoint, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + token
-    },
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload)
   })
   .then(function(res) { return res.json(); })
   .then(function(data) {
-    if (data.id) {
+    if (data.inlineMessage || data.redirectUri) {
       showToast('✓ Contact saved to HubSpot CRM', 'success');
-      addNoteToContact(data.id, roiNote, token);
     } else {
-      console.error('HubSpot error:', data);
+      console.error('HubSpot Forms response:', data);
       showToast('HubSpot sync issue — see console', 'error');
     }
   })
@@ -1469,28 +1462,6 @@ function submitToHubSpot() {
     showToast('HubSpot connection failed', 'error');
   });
 }
-
-function addNoteToContact(contactId, noteText, token) {
-  fetch('https://api.hubapi.com/crm/v3/objects/notes', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + token
-    },
-    body: JSON.stringify({
-      properties: {
-        hs_note_body: noteText,
-        hs_timestamp: new Date().getTime()
-      },
-      associations: [{
-        to: { id: contactId },
-        types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: 202 }]
-      }]
-    })
-  })
-  .catch(function(err) { console.error('Note error:', err); });
-}
-
 
 function showToast(message, type) {
   const existing = document.getElementById('hs-toast');
