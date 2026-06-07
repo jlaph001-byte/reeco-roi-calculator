@@ -7,767 +7,168 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
-    --navy: #1B2B4B;
-    --navy-light: #2D4270;
-    --green: #3AB76B;
-    --green-light: #E8F7EF;
-    --green-dark: #1B7A42;
-    --off-white: #F7F8FA;
-    --border: #E2E4E8;
-    --body: #4A5568;
-    --muted: #8A94A6;
-    --white: #ffffff;
+    --navy: #1B2B4B; --navy-light: #2D4270; --green: #3AB76B;
+    --green-light: #E8F7EF; --green-dark: #1B7A42; --off-white: #F7F8FA;
+    --border: #E2E4E8; --body: #4A5568; --muted: #8A94A6; --white: #ffffff;
     --shadow: 0 2px 12px rgba(27,43,75,0.08);
-    --shadow-lg: 0 8px 32px rgba(27,43,75,0.12);
   }
-
   html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--off-white);
-    color: var(--body);
-    min-height: 100vh;
-  }
+  body { font-family: 'DM Sans', sans-serif; background: var(--off-white); color: var(--body); min-height: 100vh; }
 
   /* NAV */
-  nav {
-    background: var(--white);
-    border-bottom: 1px solid var(--border);
-    padding: 0 2rem;
-    height: 64px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    text-decoration: none;
-  }
-
-  .logo-mark {
-    width: 34px;
-    height: 34px;
-    background: var(--navy);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
+  nav { background: var(--white); border-bottom: 1px solid var(--border); padding: 0 2rem; height: 64px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+  .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .logo-mark { width: 34px; height: 34px; background: var(--navy); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
   .logo-mark svg { width: 20px; height: 20px; }
-
-  .logo-text {
-    font-size: 22px;
-    font-weight: 700;
-    color: var(--navy);
-    letter-spacing: -0.5px;
-  }
-
+  .logo-text { font-size: 22px; font-weight: 700; color: var(--navy); letter-spacing: -0.5px; }
   .logo-text span { color: var(--green); }
-
-  .nav-badge {
-    background: var(--green-light);
-    color: var(--green-dark);
-    font-size: 12px;
-    font-weight: 600;
-    padding: 4px 12px;
-    border-radius: 20px;
-  }
+  .nav-badge { background: var(--green-light); color: var(--green-dark); font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 20px; }
 
   /* SCREENS */
   .screen { display: none; }
   .screen.active { display: block; }
 
   /* HERO */
-  .hero {
-    background: var(--navy);
-    padding: 3.5rem 2rem 3rem;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: -60px; right: -60px;
-    width: 300px; height: 300px;
-    border-radius: 50%;
-    background: rgba(58,183,107,0.08);
-  }
-
-  .hero::after {
-    content: '';
-    position: absolute;
-    bottom: -80px; left: -40px;
-    width: 240px; height: 240px;
-    border-radius: 50%;
-    background: rgba(58,183,107,0.06);
-  }
-
-  .hero-eyebrow {
-    display: inline-block;
-    background: rgba(58,183,107,0.15);
-    color: var(--green);
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 5px 14px;
-    border-radius: 20px;
-    margin-bottom: 1.25rem;
-  }
-
-  .hero h1 {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(2rem, 4vw, 3rem);
-    color: var(--white);
-    line-height: 1.15;
-    margin-bottom: 1rem;
-    position: relative;
-    z-index: 1;
-  }
-
-  .hero h1 em {
-    color: var(--green);
-    font-style: normal;
-  }
-
-  .hero p {
-    color: rgba(255,255,255,0.7);
-    font-size: 16px;
-    max-width: 520px;
-    margin: 0 auto;
-    line-height: 1.6;
-    position: relative;
-    z-index: 1;
-  }
+  .hero { background: var(--navy); padding: 3.5rem 2rem 3rem; text-align: center; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; top: -60px; right: -60px; width: 300px; height: 300px; border-radius: 50%; background: rgba(58,183,107,0.08); }
+  .hero-eyebrow { display: inline-block; background: rgba(58,183,107,0.15); color: var(--green); font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 5px 14px; border-radius: 20px; margin-bottom: 1.25rem; }
+  .hero h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2rem, 4vw, 3rem); color: var(--white); line-height: 1.15; margin-bottom: 1rem; position: relative; z-index: 1; }
+  .hero h1 em { color: var(--green); font-style: normal; }
+  .hero p { color: rgba(255,255,255,0.7); font-size: 16px; max-width: 520px; margin: 0 auto; line-height: 1.6; position: relative; z-index: 1; }
 
   /* PROGRESS */
-  .progress-wrap {
-    background: var(--white);
-    border-bottom: 1px solid var(--border);
-    padding: 1rem 2rem;
-  }
-
-  .progress-inner {
-    max-width: 760px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    gap: 0;
-  }
-
-  .progress-step {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex: 1;
-    position: relative;
-  }
-
-  .progress-step:not(:last-child)::after {
-    content: '';
-    position: absolute;
-    left: calc(50% + 16px);
-    right: calc(-50% + 16px);
-    top: 14px;
-    height: 2px;
-    background: var(--border);
-    z-index: 0;
-  }
-
+  .progress-wrap { background: var(--white); border-bottom: 1px solid var(--border); padding: 1rem 2rem; }
+  .progress-inner { max-width: 640px; margin: 0 auto; display: flex; align-items: center; }
+  .progress-step { display: flex; align-items: center; gap: 8px; flex: 1; position: relative; }
+  .progress-step:not(:last-child)::after { content: ''; position: absolute; left: calc(50% + 16px); right: calc(-50% + 16px); top: 14px; height: 2px; background: var(--border); z-index: 0; }
   .progress-step.done:not(:last-child)::after { background: var(--green); }
-
-  .step-dot {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    border: 2px solid var(--border);
-    background: var(--white);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--muted);
-    flex-shrink: 0;
-    position: relative;
-    z-index: 1;
-    transition: all 0.3s;
-  }
-
-  .progress-step.active .step-dot {
-    border-color: var(--green);
-    background: var(--green);
-    color: white;
-  }
-
-  .progress-step.done .step-dot {
-    border-color: var(--green);
-    background: var(--green);
-    color: white;
-  }
-
-  .step-label {
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--muted);
-    white-space: nowrap;
-  }
-
+  .step-dot { width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--border); background: var(--white); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; color: var(--muted); flex-shrink: 0; position: relative; z-index: 1; transition: all 0.3s; }
+  .progress-step.active .step-dot { border-color: var(--green); background: var(--green); color: white; }
+  .progress-step.done .step-dot { border-color: var(--green); background: var(--green); color: white; }
+  .step-label { font-size: 12px; font-weight: 500; color: var(--muted); white-space: nowrap; }
   .progress-step.active .step-label { color: var(--navy); font-weight: 600; }
   .progress-step.done .step-label { color: var(--green-dark); }
 
-  /* FORM LAYOUT */
-  .form-container {
-    max-width: 760px;
-    margin: 2rem auto;
-    padding: 0 1.5rem 4rem;
-  }
-
-  .form-section {
-    background: var(--white);
-    border-radius: 16px;
-    border: 1px solid var(--border);
-    overflow: hidden;
-    margin-bottom: 1.5rem;
-    box-shadow: var(--shadow);
-    display: none;
-  }
-
+  /* FORM */
+  .form-container { max-width: 680px; margin: 2rem auto; padding: 0 1.5rem 4rem; }
+  .form-section { background: var(--white); border-radius: 16px; border: 1px solid var(--border); overflow: hidden; margin-bottom: 1.5rem; box-shadow: var(--shadow); display: none; animation: fadeUp 0.3s ease; }
   .form-section.active { display: block; }
-
-  .section-header {
-    padding: 1.5rem 1.75rem;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-
-  .section-icon {
-    width: 42px;
-    height: 42px;
-    border-radius: 10px;
-    background: var(--green-light);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    flex-shrink: 0;
-  }
-
-  .section-header h2 {
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--navy);
-    margin-bottom: 2px;
-  }
-
-  .section-header p {
-    font-size: 13px;
-    color: var(--muted);
-  }
-
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+  .section-header { padding: 1.5rem 1.75rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 14px; }
+  .section-icon { width: 42px; height: 42px; border-radius: 10px; background: var(--green-light); display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+  .section-header h2 { font-size: 18px; font-weight: 700; color: var(--navy); margin-bottom: 2px; }
+  .section-header p { font-size: 13px; color: var(--muted); }
   .section-body { padding: 1.75rem; }
-
-  .field-group {
-    margin-bottom: 1.5rem;
-  }
-
+  .field-group { margin-bottom: 1.4rem; }
   .field-group:last-child { margin-bottom: 0; }
-
-  label {
-    display: block;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--navy);
-    margin-bottom: 6px;
+  label { display: block; font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 6px; }
+  label .optional { font-weight: 400; color: var(--muted); font-size: 12px; }
+  input[type="text"], input[type="email"], input[type="number"], select {
+    width: 100%; height: 46px; border: 1.5px solid var(--border); border-radius: 8px; padding: 0 14px;
+    font-size: 15px; font-family: 'DM Sans', sans-serif; color: var(--navy); background: var(--white); transition: border-color 0.2s; appearance: none;
   }
-
-  label .optional {
-    font-weight: 400;
-    color: var(--muted);
-    font-size: 12px;
-  }
-
-  input[type="text"],
-  input[type="email"],
-  input[type="number"],
-  select {
-    width: 100%;
-    height: 44px;
-    border: 1.5px solid var(--border);
-    border-radius: 8px;
-    padding: 0 14px;
-    font-size: 15px;
-    font-family: 'DM Sans', sans-serif;
-    color: var(--navy);
-    background: var(--white);
-    transition: border-color 0.2s;
-    appearance: none;
-  }
-
-  input:focus, select:focus {
-    outline: none;
-    border-color: var(--green);
-    box-shadow: 0 0 0 3px rgba(58,183,107,0.12);
-  }
-
-  .field-hint {
-    font-size: 12px;
-    color: var(--muted);
-    margin-top: 5px;
-  }
-
-  .field-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-  }
-
+  input:focus, select:focus { outline: none; border-color: var(--green); box-shadow: 0 0 0 3px rgba(58,183,107,0.12); }
+  .field-hint { font-size: 12px; color: var(--muted); margin-top: 5px; }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
   @media (max-width: 540px) { .field-row { grid-template-columns: 1fr; } }
 
-  /* RADIO GROUP */
-  .radio-group {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-
-  .radio-option {
-    flex: 1;
-    min-width: 100px;
-  }
-
+  /* RADIO */
+  .radio-group { display: flex; gap: 10px; flex-wrap: wrap; }
+  .radio-option { flex: 1; min-width: 90px; }
   .radio-option input { display: none; }
+  .radio-option label { display: flex; align-items: center; justify-content: center; padding: 10px 12px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 14px; font-weight: 500; color: var(--body); cursor: pointer; transition: all 0.2s; text-align: center; margin: 0; }
+  .radio-option input:checked + label { border-color: var(--green); background: var(--green-light); color: var(--green-dark); font-weight: 600; }
 
-  .radio-option label {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 16px;
-    border: 1.5px solid var(--border);
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--body);
-    cursor: pointer;
-    transition: all 0.2s;
-    text-align: center;
-    margin: 0;
-  }
-
-  .radio-option input:checked + label {
-    border-color: var(--green);
-    background: var(--green-light);
-    color: var(--green-dark);
-    font-weight: 600;
-  }
-
-  /* NAV BUTTONS */
-  .form-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 2rem;
-    gap: 1rem;
-  }
-
-  .btn {
-    padding: 12px 28px;
-    border-radius: 8px;
-    font-size: 15px;
-    font-weight: 600;
-    font-family: 'DM Sans', sans-serif;
-    cursor: pointer;
-    transition: all 0.2s;
-    border: none;
-  }
-
-  .btn-primary {
-    background: var(--green);
-    color: white;
-    box-shadow: 0 2px 8px rgba(58,183,107,0.3);
-  }
-
+  /* BUTTONS */
+  .form-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; gap: 1rem; }
+  .btn { padding: 12px 28px; border-radius: 8px; font-size: 15px; font-weight: 600; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: all 0.2s; border: none; }
+  .btn-primary { background: var(--green); color: white; box-shadow: 0 2px 8px rgba(58,183,107,0.3); }
   .btn-primary:hover { background: #2da05e; transform: translateY(-1px); }
-
-  .btn-ghost {
-    background: transparent;
-    color: var(--navy);
-    border: 1.5px solid var(--border);
-  }
-
+  .btn-ghost { background: transparent; color: var(--navy); border: 1.5px solid var(--border); }
   .btn-ghost:hover { border-color: var(--navy); background: var(--off-white); }
-
-  .btn-navy {
-    background: var(--navy);
-    color: white;
-  }
-
+  .btn-navy { background: var(--navy); color: white; }
   .btn-navy:hover { background: var(--navy-light); }
+  .btn-lg { padding: 14px 32px; font-size: 16px; border-radius: 10px; }
+  select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238A94A6' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
 
-  /* RESULTS PAGE */
-  .results-hero {
-    background: var(--navy);
-    padding: 2.5rem 2rem;
-    text-align: center;
-  }
-
-  .results-hero h1 {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(1.6rem, 3vw, 2.4rem);
-    color: white;
-    margin-bottom: 0.5rem;
-  }
-
+  /* RESULTS */
+  .results-hero { background: var(--navy); padding: 2.5rem 2rem; text-align: center; }
+  .results-hero h1 { font-family: 'DM Serif Display', serif; font-size: clamp(1.6rem, 3vw, 2.4rem); color: white; margin-bottom: 0.5rem; }
   .results-hero p { color: rgba(255,255,255,0.65); font-size: 15px; }
+  .results-container { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
 
-  .results-container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 2rem 1.5rem 4rem;
-  }
-
-  /* TOTAL ROI CARD */
-  .roi-total-card {
-    background: var(--navy);
-    border-radius: 20px;
-    padding: 2.5rem;
-    margin-bottom: 2rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 1.5rem;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .roi-total-card::before {
-    content: '';
-    position: absolute;
-    top: -40px; right: -40px;
-    width: 220px; height: 220px;
-    border-radius: 50%;
-    background: rgba(58,183,107,0.1);
-  }
-
+  .roi-total-card { background: var(--navy); border-radius: 20px; padding: 2.5rem; margin-bottom: 2rem; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; position: relative; overflow: hidden; }
+  .roi-total-card::before { content: ''; position: absolute; top: -40px; right: -40px; width: 220px; height: 220px; border-radius: 50%; background: rgba(58,183,107,0.1); }
   .roi-metric { position: relative; z-index: 1; }
-
-  .roi-metric-label {
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.5);
-    margin-bottom: 8px;
-  }
-
-  .roi-metric-value {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(1.8rem, 3vw, 2.6rem);
-    color: var(--green);
-    line-height: 1;
-  }
-
+  .roi-metric-label { font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 8px; }
+  .roi-metric-value { font-family: 'DM Serif Display', serif; font-size: clamp(1.8rem, 3vw, 2.6rem); color: var(--green); line-height: 1; }
   .roi-metric-value.white { color: white; }
+  .roi-metric-sub { font-size: 13px; color: rgba(255,255,255,0.45); margin-top: 4px; }
+  @media (max-width: 600px) { .roi-total-card { grid-template-columns: 1fr; } }
 
-  .roi-metric-sub {
-    font-size: 13px;
-    color: rgba(255,255,255,0.45);
-    margin-top: 4px;
-  }
-
-  @media (max-width: 600px) {
-    .roi-total-card { grid-template-columns: 1fr; }
-  }
-
-  /* SECTION RESULTS */
-  .results-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    margin-bottom: 2rem;
-  }
-
+  .results-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem; }
   @media (max-width: 600px) { .results-grid { grid-template-columns: 1fr; } }
 
-  .result-card {
-    background: var(--white);
-    border-radius: 14px;
-    border: 1px solid var(--border);
-    overflow: hidden;
-    box-shadow: var(--shadow);
-  }
-
-  .result-card-header {
-    padding: 1rem 1.25rem;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .result-card-title {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--navy);
-  }
-
-  .result-card-icon { font-size: 18px; }
-
-  .result-card-saving {
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--green);
-  }
-
+  .result-card { background: var(--white); border-radius: 14px; border: 1px solid var(--border); overflow: hidden; box-shadow: var(--shadow); animation: fadeUp 0.4s ease both; }
+  .result-card:nth-child(2) { animation-delay: 0.05s; }
+  .result-card:nth-child(3) { animation-delay: 0.10s; }
+  .result-card:nth-child(4) { animation-delay: 0.15s; }
+  .result-card-header { padding: 1rem 1.25rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+  .result-card-title { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; color: var(--navy); }
+  .result-card-saving { font-size: 20px; font-weight: 700; color: var(--green); }
   .result-card-body { padding: 1rem 1.25rem; }
+  .result-line { display: flex; justify-content: space-between; align-items: baseline; padding: 5px 0; border-bottom: 0.5px solid var(--border); font-size: 13px; }
+  .result-line:last-child { border-bottom: none; }
+  .result-line .lbl { color: var(--muted); }
+  .result-line .val { font-weight: 600; color: var(--navy); }
+  .result-line .val.green { color: var(--green); }
 
-  .result-input-line {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    padding: 5px 0;
-    border-bottom: 0.5px solid var(--border);
-    font-size: 13px;
-  }
+  /* PROPERTY SUMMARY */
+  .property-summary { background: var(--white); border-radius: 14px; border: 1px solid var(--border); padding: 1.25rem 1.5rem; margin-bottom: 2rem; display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; box-shadow: var(--shadow); }
+  .ps-item { text-align: center; }
+  .ps-item .val { font-size: 22px; font-weight: 700; color: var(--navy); }
+  .ps-item .lbl { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .ps-sep { width: 1px; height: 40px; background: var(--border); }
 
-  .result-input-line:last-child { border-bottom: none; }
-
-  .result-input-line .label { color: var(--muted); }
-  .result-input-line .value { font-weight: 600; color: var(--navy); }
+  /* INVESTMENT */
+  .investment-card { background: var(--green-light); border: 1.5px solid var(--green); border-radius: 14px; padding: 1.5rem; margin-bottom: 2rem; display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+  .investment-card-text h3 { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+  .investment-card-text p { font-size: 13px; color: var(--green-dark); }
+  .investment-input-wrap { display: flex; align-items: center; gap: 8px; }
+  .investment-input-wrap span { font-size: 18px; font-weight: 700; color: var(--navy); }
+  .investment-input { width: 130px; height: 42px; border: 1.5px solid var(--green); border-radius: 8px; padding: 0 12px; font-size: 16px; font-weight: 600; color: var(--navy); font-family: 'DM Sans', sans-serif; background: white; }
 
   /* ASSUMPTIONS */
-  .assumptions-card {
-    background: var(--white);
-    border-radius: 14px;
-    border: 1px solid var(--border);
-    margin-bottom: 2rem;
-    overflow: hidden;
-    box-shadow: var(--shadow);
-  }
-
-  .assumptions-header {
-    padding: 1rem 1.25rem;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    cursor: pointer;
-    user-select: none;
-  }
-
-  .assumptions-header h3 {
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--navy);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .assumptions-toggle {
-    font-size: 12px;
-    color: var(--green);
-    font-weight: 600;
-  }
-
-  .assumptions-body {
-    padding: 1.25rem;
-    display: none;
-  }
-
+  .assumptions-card { background: var(--white); border-radius: 14px; border: 1px solid var(--border); margin-bottom: 2rem; overflow: hidden; box-shadow: var(--shadow); }
+  .assumptions-header { padding: 1rem 1.25rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; cursor: pointer; user-select: none; }
+  .assumptions-header h3 { font-size: 15px; font-weight: 700; color: var(--navy); display: flex; align-items: center; gap: 8px; }
+  .assumptions-toggle { font-size: 12px; color: var(--green); font-weight: 600; }
+  .assumptions-body { padding: 1.25rem; display: none; }
   .assumptions-body.open { display: block; }
-
-  .assumption-row {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 10px 0;
-    border-bottom: 0.5px solid var(--border);
-  }
-
+  .assumption-row { display: flex; align-items: center; gap: 1rem; padding: 10px 0; border-bottom: 0.5px solid var(--border); }
   .assumption-row:last-child { border-bottom: none; }
+  .assumption-label { flex: 1; font-size: 13px; color: var(--body); }
+  .assumption-label span { display: block; font-size: 11px; color: var(--muted); margin-top: 1px; }
+  .assumption-control { display: flex; align-items: center; gap: 8px; }
+  .assumption-input { width: 90px; height: 36px; border: 1.5px solid var(--border); border-radius: 6px; text-align: center; font-size: 14px; font-weight: 600; color: var(--navy); font-family: 'DM Sans', sans-serif; }
+  .assumption-unit { font-size: 13px; color: var(--muted); min-width: 40px; }
 
-  .assumption-label {
-    flex: 1;
-    font-size: 13px;
-    color: var(--body);
-  }
+  .divider-label { text-align: center; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 2rem 0 1rem; display: flex; align-items: center; gap: 12px; }
+  .divider-label::before, .divider-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .actions-bar { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem; }
 
-  .assumption-label span {
-    display: block;
-    font-size: 11px;
-    color: var(--muted);
-    margin-top: 1px;
-  }
+  /* TOAST */
+  #hs-toast { position: fixed; bottom: 24px; right: 24px; z-index: 9999; padding: 12px 20px; border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
 
-  .assumption-control {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .assumption-input {
-    width: 90px;
-    height: 36px;
-    border: 1.5px solid var(--border);
-    border-radius: 6px;
-    text-align: center;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--navy);
-    font-family: 'DM Sans', sans-serif;
-  }
-
-  .assumption-unit {
-    font-size: 13px;
-    color: var(--muted);
-    min-width: 40px;
-  }
-
-  /* REECO INVESTMENT */
-  .investment-card {
-    background: var(--green-light);
-    border: 1.5px solid var(--green);
-    border-radius: 14px;
-    padding: 1.5rem;
-    margin-bottom: 2rem;
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-  }
-
-  .investment-card-text { flex: 1; }
-
-  .investment-card-text h3 {
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--navy);
-    margin-bottom: 4px;
-  }
-
-  .investment-card-text p {
-    font-size: 13px;
-    color: var(--green-dark);
-  }
-
-  .investment-input-wrap {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .investment-input-wrap span {
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--navy);
-  }
-
-  .investment-input {
-    width: 130px;
-    height: 42px;
-    border: 1.5px solid var(--green);
-    border-radius: 8px;
-    padding: 0 12px;
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--navy);
-    font-family: 'DM Sans', sans-serif;
-    background: white;
-  }
-
-  /* PDF ACTIONS */
-  .actions-bar {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-top: 2rem;
-  }
-
-  .btn-lg {
-    padding: 14px 32px;
-    font-size: 16px;
-    border-radius: 10px;
-  }
-
-  /* PRINT STYLES */
+  /* PRINT */
   @media print {
-    nav, .actions-bar, .assumptions-card, .investment-card, .progress-wrap { display: none !important; }
+    nav, .actions-bar, .assumptions-card, .investment-card, .progress-wrap, #screen-form { display: none !important; }
     .screen { display: block !important; }
-    #screen-form { display: none !important; }
     body { background: white; }
     .roi-total-card { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     .result-card { break-inside: avoid; }
   }
-
-  /* ANIMATIONS */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(16px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .form-section.active { animation: fadeUp 0.3s ease; }
-  .result-card { animation: fadeUp 0.4s ease both; }
-  .result-card:nth-child(2) { animation-delay: 0.05s; }
-  .result-card:nth-child(3) { animation-delay: 0.10s; }
-  .result-card:nth-child(4) { animation-delay: 0.15s; }
-
-  .divider-label {
-    text-align: center;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin: 2rem 0 1rem;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .divider-label::before, .divider-label::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-  }
-
-  .property-summary {
-    background: var(--white);
-    border-radius: 14px;
-    border: 1px solid var(--border);
-    padding: 1.25rem 1.5rem;
-    margin-bottom: 2rem;
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-    box-shadow: var(--shadow);
-  }
-
-  .property-summary-item { text-align: center; }
-  .property-summary-item .val { font-size: 22px; font-weight: 700; color: var(--navy); }
-  .property-summary-item .lbl { font-size: 12px; color: var(--muted); margin-top: 2px; }
-  .property-sep { width: 1px; height: 40px; background: var(--border); }
-
-  select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238A94A6' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
 </style>
 </head>
 <body>
@@ -786,50 +187,31 @@
   <div class="nav-badge">ROI Assessment</div>
 </nav>
 
-<!-- ===================== FORM SCREEN ===================== -->
+<!-- FORM SCREEN -->
 <div id="screen-form" class="screen active">
 
   <div class="hero">
     <div class="hero-eyebrow">Personalized ROI Calculator</div>
     <h1>How much can your<br><em>hotel group save?</em></h1>
-    <p>Answer a few questions about your operations and we'll calculate your estimated annual savings with Reeco.</p>
+    <p>Answer 10 quick questions and we'll calculate your estimated annual savings with Reeco.</p>
   </div>
 
   <div class="progress-wrap">
     <div class="progress-inner">
-      <div class="progress-step active" id="ps-0">
-        <div class="step-dot">1</div>
-        <div class="step-label">Your property</div>
-      </div>
-      <div class="progress-step" id="ps-1">
-        <div class="step-dot">2</div>
-        <div class="step-label">AP automation</div>
-      </div>
-      <div class="progress-step" id="ps-2">
-        <div class="step-dot">3</div>
-        <div class="step-label">Purchasing</div>
-      </div>
-      <div class="progress-step" id="ps-3">
-        <div class="step-dot">4</div>
-        <div class="step-label">Inventory</div>
-      </div>
-      <div class="progress-step" id="ps-4">
-        <div class="step-dot">5</div>
-        <div class="step-label">Food cost</div>
-      </div>
+      <div class="progress-step active" id="ps-0"><div class="step-dot">1</div><div class="step-label">Your property</div></div>
+      <div class="progress-step" id="ps-1"><div class="step-dot">2</div><div class="step-label">AP automation</div></div>
+      <div class="progress-step" id="ps-2"><div class="step-dot">3</div><div class="step-label">Purchasing</div></div>
+      <div class="progress-step" id="ps-3"><div class="step-dot">4</div><div class="step-label">Inventory</div></div>
     </div>
   </div>
 
   <div class="form-container">
 
-    <!-- SECTION 0: PROFILE -->
+    <!-- SECTION 0: PROPERTY PROFILE -->
     <div class="form-section active" id="sec-0">
       <div class="section-header">
         <div class="section-icon">🏨</div>
-        <div>
-          <h2>Your property</h2>
-          <p>Tell us a bit about your hotel operation</p>
-        </div>
+        <div><h2>Your property</h2><p>Tell us about your hotel operation — 4 quick questions</p></div>
       </div>
       <div class="section-body">
         <div class="field-row">
@@ -838,35 +220,18 @@
             <input type="text" id="f-name" placeholder="e.g. Sunrise Hotel Group">
           </div>
           <div class="field-group">
-            <label>Your name & title</label>
+            <label>Your name &amp; title</label>
             <input type="text" id="f-contact" placeholder="e.g. Maria Lopez, VP Operations">
           </div>
         </div>
         <div class="field-group">
-          <label>Your email address</label>
+          <label>Email address</label>
           <input type="email" id="f-email" placeholder="e.g. maria@sunrisehotels.com">
-          <div class="field-hint">Used to follow up with your personalized ROI summary</div>
-        </div>
-        <div class="field-row">
-          <div class="field-group">
-            <label>Number of properties</label>
-            <input type="number" id="f-properties" placeholder="e.g. 8" min="1">
-          </div>
-          <div class="field-group">
-            <label>Avg. rooms per property</label>
-            <input type="number" id="f-rooms" placeholder="e.g. 150" min="1">
-          </div>
+          <div class="field-hint">We'll use this to follow up with your personalized ROI summary</div>
         </div>
         <div class="field-group">
-          <label>Current procurement system</label>
-          <select id="f-current-system">
-            <option value="">Select one...</option>
-            <option value="excel">Excel / spreadsheets only</option>
-            <option value="portals">Multiple vendor portals / websites</option>
-            <option value="email">Email & phone orders</option>
-            <option value="software">Existing procurement software</option>
-            <option value="mix">A mix of the above</option>
-          </select>
+          <label>Number of properties in your portfolio</label>
+          <input type="number" id="f-properties" placeholder="e.g. 8" min="1" oninput="this.value=this.value.replace(/[^0-9]/g,'')">
         </div>
       </div>
     </div>
@@ -875,33 +240,24 @@
     <div class="form-section" id="sec-1">
       <div class="section-header">
         <div class="section-icon">🧾</div>
-        <div>
-          <h2>AP automation</h2>
-          <p>Invoice processing — your single biggest time sink in back-office ops</p>
-        </div>
+        <div><h2>AP automation</h2><p>Invoice processing — your biggest back-office time sink</p></div>
       </div>
       <div class="section-body">
-        <div class="field-row">
-          <div class="field-group">
-            <label>Invoices processed per month <span class="optional">(across all properties)</span></label>
-            <input type="number" id="f-invoices" placeholder="e.g. 400" min="1">
-            <div class="field-hint">Industry average: ~150–500 per property/month</div>
-          </div>
-          <div class="field-group">
-            <label>People handling invoice processing</label>
-            <input type="number" id="f-ap-staff" placeholder="e.g. 2" min="1">
-          </div>
+        <div class="field-group">
+          <label>How many invoices do you process per month? <span class="optional">(across all properties)</span></label>
+          <input type="number" id="f-invoices" placeholder="e.g. 400" min="1" oninput="this.value=this.value.replace(/[^0-9]/g,'')">
+          <div class="field-hint">Industry average: 150–500 per property/month</div>
         </div>
         <div class="field-group">
-          <label>Approximate hourly wage of AP staff <span class="optional">(optional — we'll estimate if blank)</span></label>
-          <input type="number" id="f-ap-wage" placeholder="e.g. 22" min="1">
-          <div class="field-hint">Leave blank to use the industry default of $22/hr</div>
+          <label>How many people handle invoice processing?</label>
+          <input type="number" id="f-ap-staff" placeholder="e.g. 2" min="1" oninput="this.value=this.value.replace(/[^0-9]/g,'')">
+          <div class="field-hint">Include all staff across all properties who touch invoice coding and entry</div>
         </div>
         <div class="field-group">
           <label>Is your AP team at full capacity or backlogged?</label>
           <div class="radio-group">
             <div class="radio-option"><input type="radio" name="ap-cap" id="ap-cap-yes" value="yes"><label for="ap-cap-yes">Yes, always behind</label></div>
-            <div class="radio-option"><input type="radio" name="ap-cap" id="ap-cap-some" value="some"><label for="ap-cap-some">Sometimes</label></div>
+            <div class="radio-option"><input type="radio" name="ap-cap" id="ap-cap-some" value="sometimes"><label for="ap-cap-some">Sometimes</label></div>
             <div class="radio-option"><input type="radio" name="ap-cap" id="ap-cap-no" value="no"><label for="ap-cap-no">No, manageable</label></div>
           </div>
         </div>
@@ -912,34 +268,24 @@
     <div class="form-section" id="sec-2">
       <div class="section-header">
         <div class="section-icon">🛒</div>
-        <div>
-          <h2>Purchasing & receiving</h2>
-          <p>Order costs and the time your team spends placing orders</p>
-        </div>
+        <div><h2>Purchasing &amp; receiving</h2><p>Supply spend and vendor complexity</p></div>
       </div>
       <div class="section-body">
         <div class="field-group">
-          <label>Total annual supply spend <span class="optional">(F&B + cleaning + maintenance + services)</span></label>
-          <input type="number" id="f-spend" placeholder="e.g. 2500000" min="0">
-          <div class="field-hint">Include all categories across all properties combined</div>
+          <label>Total annual supply spend <span class="optional">(F&amp;B + cleaning + maintenance + services, all properties)</span></label>
+          <input type="number" id="f-spend" placeholder="e.g. 2500000" min="0" oninput="this.value=this.value.replace(/[^0-9]/g,'')">
+          <div class="field-hint">Enter the combined total across all properties and categories</div>
         </div>
-        <div class="field-row">
-          <div class="field-group">
-            <label>Hours/week spent placing & following up on orders</label>
-            <input type="number" id="f-order-hours" placeholder="e.g. 15" min="0">
-            <div class="field-hint">Across all purchasing staff, all properties</div>
-          </div>
-          <div class="field-group">
-            <label>Number of active vendors/suppliers</label>
-            <input type="number" id="f-vendors" placeholder="e.g. 25" min="1">
-          </div>
+        <div class="field-group">
+          <label>How many active vendors do you currently order from?</label>
+          <input type="number" id="f-vendors" placeholder="e.g. 25" min="1" oninput="this.value=this.value.replace(/[^0-9]/g,'')">
         </div>
         <div class="field-group">
           <label>How often do you experience stockouts or unfilled order lines?</label>
           <div class="radio-group">
-            <div class="radio-option"><input type="radio" name="stockout" id="so-freq" value="freq"><label for="so-freq">Frequently</label></div>
-            <div class="radio-option"><input type="radio" name="stockout" id="so-some" value="some"><label for="so-some">Sometimes</label></div>
-            <div class="radio-option"><input type="radio" name="stockout" id="so-rare" value="rare"><label for="so-rare">Rarely</label></div>
+            <div class="radio-option"><input type="radio" name="stockout" id="so-freq" value="Frequently"><label for="so-freq">Frequently</label></div>
+            <div class="radio-option"><input type="radio" name="stockout" id="so-some" value="Sometimes"><label for="so-some">Sometimes</label></div>
+            <div class="radio-option"><input type="radio" name="stockout" id="so-rare" value="Rarely"><label for="so-rare">Rarely</label></div>
           </div>
         </div>
       </div>
@@ -949,10 +295,7 @@
     <div class="form-section" id="sec-3">
       <div class="section-header">
         <div class="section-icon">📦</div>
-        <div>
-          <h2>Inventory management</h2>
-          <p>How much time your team spends counting and auditing stock</p>
-        </div>
+        <div><h2>Inventory management</h2><p>How much time your team spends counting stock</p></div>
       </div>
       <div class="section-body">
         <div class="field-group">
@@ -963,58 +306,17 @@
             <div class="radio-option"><input type="radio" name="inv-freq" id="if-monthly" value="12"><label for="if-monthly">Monthly</label></div>
           </div>
         </div>
-        <div class="field-row">
-          <div class="field-group">
-            <label>Person-hours per full count <span class="optional">(per property)</span></label>
-            <input type="number" id="f-inv-hours" placeholder="e.g. 8" min="0">
-            <div class="field-hint">Total hours for all staff involved in one count</div>
-          </div>
-          <div class="field-group">
-            <label>Avg. hourly rate of inventory staff</label>
-            <input type="number" id="f-inv-wage" placeholder="e.g. 18" min="0">
-            <div class="field-hint">Leave blank to use default of $18/hr</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- SECTION 4: CULINARY -->
-    <div class="form-section" id="sec-4">
-      <div class="section-header">
-        <div class="section-icon">🍽️</div>
-        <div>
-          <h2>Culinary & food cost visibility</h2>
-          <p>Real-time recipe costing and margin protection for your F&B outlets</p>
-        </div>
-      </div>
-      <div class="section-body">
-        <div class="field-row">
-          <div class="field-group">
-            <label>Total annual F&B revenue <span class="optional">(all properties)</span></label>
-            <input type="number" id="f-fb-revenue" placeholder="e.g. 3000000" min="0">
-          </div>
-          <div class="field-group">
-            <label>Current food cost percentage</label>
-            <input type="number" id="f-food-cost" placeholder="e.g. 32" min="0" max="100">
-            <div class="field-hint">Industry average: 28–35%. Leave blank to use 32%</div>
-          </div>
+        <div class="field-group">
+          <label>How many person-hours does one full inventory count take? <span class="optional">(per property)</span></label>
+          <input type="number" id="f-inv-hours" placeholder="e.g. 8" min="0" oninput="this.value=this.value.replace(/[^0-9]/g,'')">
+          <div class="field-hint">Total hours for all staff involved in a single count at one property</div>
         </div>
         <div class="field-group">
-          <label>How do you currently track recipe costs and menu profitability?</label>
-          <select id="f-recipe-tracking">
-            <option value="">Select one...</option>
-            <option value="none">We don't track it</option>
-            <option value="manual">Manually / memory</option>
-            <option value="excel">Excel spreadsheets</option>
-            <option value="software">Dedicated software</option>
-          </select>
-        </div>
-        <div class="field-group">
-          <label>Do your chefs have real-time visibility into ingredient prices?</label>
+          <label>Does your team currently track inventory on paper or Excel?</label>
           <div class="radio-group">
-            <div class="radio-option"><input type="radio" name="chef-vis" id="cv-yes" value="yes"><label for="cv-yes">Yes</label></div>
-            <div class="radio-option"><input type="radio" name="chef-vis" id="cv-no" value="no"><label for="cv-no">No</label></div>
-            <div class="radio-option"><input type="radio" name="chef-vis" id="cv-partial" value="partial"><label for="cv-partial">Partially</label></div>
+            <div class="radio-option"><input type="radio" name="inv-method" id="im-yes" value="Yes"><label for="im-yes">Yes</label></div>
+            <div class="radio-option"><input type="radio" name="inv-method" id="im-no" value="No"><label for="im-no">No — software</label></div>
+            <div class="radio-option"><input type="radio" name="inv-method" id="im-mix" value="Mix"><label for="im-mix">Mix of both</label></div>
           </div>
         </div>
       </div>
@@ -1028,42 +330,27 @@
   </div>
 </div>
 
-<!-- ===================== RESULTS SCREEN ===================== -->
+<!-- RESULTS SCREEN -->
 <div id="screen-results" class="screen">
 
   <div class="results-hero">
-    <h1 id="r-property-name">Your Hotel Group</h1>
-    <p>Estimated annual value with Reeco — based on your inputs and industry benchmarks</p>
+    <h1 id="r-property-name">Your Hotel Group — ROI Overview</h1>
+    <p>Estimated annual value with Reeco, based on your inputs and industry benchmarks</p>
   </div>
 
   <div class="results-container">
 
-    <!-- PROPERTY SUMMARY -->
-    <div class="property-summary" id="r-property-summary">
-      <div class="property-summary-item">
-        <div class="val" id="r-s-properties">—</div>
-        <div class="lbl">Properties</div>
-      </div>
-      <div class="property-sep"></div>
-      <div class="property-summary-item">
-        <div class="val" id="r-s-rooms">—</div>
-        <div class="lbl">Avg. rooms</div>
-      </div>
-      <div class="property-sep"></div>
-      <div class="property-summary-item">
-        <div class="val" id="r-s-vendors">—</div>
-        <div class="lbl">Active vendors</div>
-      </div>
-      <div class="property-sep"></div>
-      <div class="property-summary-item">
-        <div class="val" id="r-s-invoices">—</div>
-        <div class="lbl">Invoices / month</div>
-      </div>
-      <div class="property-sep"></div>
-      <div class="property-summary-item">
-        <div class="val" id="r-s-system">—</div>
-        <div class="lbl">Current system</div>
-      </div>
+    <!-- PROPERTY SUMMARY BAR -->
+    <div class="property-summary">
+      <div class="ps-item"><div class="val" id="r-s-properties">—</div><div class="lbl">Properties</div></div>
+      <div class="ps-sep"></div>
+      <div class="ps-item"><div class="val" id="r-s-invoices">—</div><div class="lbl">Invoices / month</div></div>
+      <div class="ps-sep"></div>
+      <div class="ps-item"><div class="val" id="r-s-vendors">—</div><div class="lbl">Active vendors</div></div>
+      <div class="ps-sep"></div>
+      <div class="ps-item"><div class="val" id="r-s-spend">—</div><div class="lbl">Annual spend</div></div>
+      <div class="ps-sep"></div>
+      <div class="ps-item"><div class="val" id="r-s-invfreq">—</div><div class="lbl">Inventory counts</div></div>
     </div>
 
     <!-- TOTAL ROI -->
@@ -1075,19 +362,19 @@
       </div>
       <div class="roi-metric">
         <div class="roi-metric-label">Payback period</div>
-        <div class="roi-metric-value white" id="r-payback">—</div>
+        <div class="roi-metric-value white" id="r-payback">Enter cost →</div>
         <div class="roi-metric-sub">Based on Reeco annual investment</div>
       </div>
       <div class="roi-metric">
         <div class="roi-metric-label">Hours saved / year</div>
-        <div class="roi-metric-value" id="r-hours-saved">0</div>
-        <div class="roi-metric-sub">Across AP, purchasing & inventory</div>
+        <div class="roi-metric-value" id="r-hours-saved">0 hrs</div>
+        <div class="roi-metric-sub">Across AP, purchasing &amp; inventory</div>
       </div>
     </div>
 
     <!-- REECO INVESTMENT INPUT -->
     <div class="investment-card">
-      <div class="investment-card-text">
+      <div class="investment-card-text" style="flex:1;">
         <h3>Enter Reeco annual investment</h3>
         <p>Add the annual cost to calculate net ROI and payback period</p>
       </div>
@@ -1105,121 +392,57 @@
 
       <div class="result-card">
         <div class="result-card-header">
-          <div class="result-card-title"><span class="result-card-icon">🧾</span> AP automation</div>
+          <div class="result-card-title">🧾 AP Automation</div>
           <div class="result-card-saving" id="r-ap-saving">$0</div>
         </div>
         <div class="result-card-body">
-          <div class="result-input-line">
-            <span class="label">Invoices / month</span>
-            <span class="value" id="rd-invoices">—</span>
-          </div>
-          <div class="result-input-line">
-            <span class="label">AP staff</span>
-            <span class="value" id="rd-ap-staff">—</span>
-          </div>
-          <div class="result-input-line">
-            <span class="label">Hourly wage</span>
-            <span class="value" id="rd-ap-wage">—</span>
-          </div>
-          <div class="result-input-line">
-            <span class="label">Time per invoice (today)</span>
-            <span class="value" id="rd-ap-before">8.4 min</span>
-          </div>
-          <div class="result-input-line">
-            <span class="label">Time per invoice (Reeco)</span>
-            <span class="value" style="color:var(--green)">72 sec</span>
-          </div>
-          <div class="result-input-line">
-            <span class="label">Efficiency gain</span>
-            <span class="value" style="color:var(--green)" id="rd-ap-eff">86%</span>
-          </div>
+          <div class="result-line"><span class="lbl">Invoices / month</span><span class="val" id="rd-invoices">—</span></div>
+          <div class="result-line"><span class="lbl">AP staff</span><span class="val" id="rd-ap-staff">—</span></div>
+          <div class="result-line"><span class="lbl">Fully loaded hourly rate</span><span class="val" id="rd-ap-wage">$43.27/hr</span></div>
+          <div class="result-line"><span class="lbl">Time per invoice today</span><span class="val" id="rd-ap-before">8.4 min</span></div>
+          <div class="result-line"><span class="lbl">Time per invoice with Reeco</span><span class="val green">72 sec</span></div>
+          <div class="result-line"><span class="lbl">Efficiency gain</span><span class="val green" id="rd-ap-eff">86%</span></div>
         </div>
       </div>
 
       <div class="result-card">
         <div class="result-card-header">
-          <div class="result-card-title"><span class="result-card-icon">🛒</span> Purchasing</div>
+          <div class="result-card-title">🛒 Purchasing</div>
           <div class="result-card-saving" id="r-purch-saving">$0</div>
         </div>
         <div class="result-card-body">
-          <div class="result-input-line">
-            <span class="label">Annual supply spend</span>
-            <span class="value" id="rd-spend">—</span>
-          </div>
-          <div class="result-input-line">
-            <span class="label">Ordering hours / week</span>
-            <span class="value" id="rd-order-hours">—</span>
-          </div>
-          <div class="result-input-line">
-            <span class="label">Active vendors</span>
-            <span class="value" id="rd-vendors">—</span>
-          </div>
-          <div class="result-input-line">
-            <span class="label">Order cost reduction</span>
-            <span class="value" id="rd-cost-red">10%</span>
-          </div>
-          <div class="result-input-line">
-            <span class="label">Ordering time saved</span>
-            <span class="value" style="color:var(--green)">80%</span>
-          </div>
+          <div class="result-line"><span class="lbl">Annual supply spend</span><span class="val" id="rd-spend">—</span></div>
+          <div class="result-line"><span class="lbl">Active vendors</span><span class="val" id="rd-vendors">—</span></div>
+          <div class="result-line"><span class="lbl">Stockout frequency</span><span class="val" id="rd-stockout">—</span></div>
+          <div class="result-line"><span class="lbl">Order cost reduction</span><span class="val green" id="rd-cost-red">10%</span></div>
+          <div class="result-line"><span class="lbl">Source</span><span class="val">AI supplier matching</span></div>
         </div>
       </div>
 
       <div class="result-card">
         <div class="result-card-header">
-          <div class="result-card-title"><span class="result-card-icon">📦</span> Inventory</div>
+          <div class="result-card-title">📦 Inventory</div>
           <div class="result-card-saving" id="r-inv-saving">$0</div>
         </div>
         <div class="result-card-body">
-          <div class="result-input-line">
-            <span class="label">Count frequency</span>
-            <span class="value" id="rd-inv-freq">—</span>
-          </div>
-          <div class="result-input-line">
-            <span class="label">Hours per count</span>
-            <span class="value" id="rd-inv-hours">—</span>
-          </div>
-          <div class="result-input-line">
-            <span class="label">Properties</span>
-            <span class="value" id="rd-inv-props">—</span>
-          </div>
-          <div class="result-input-line">
-            <span class="label">Staff hourly rate</span>
-            <span class="value" id="rd-inv-wage">—</span>
-          </div>
-          <div class="result-input-line">
-            <span class="label">Time reduction</span>
-            <span class="value" style="color:var(--green)">50%</span>
-          </div>
+          <div class="result-line"><span class="lbl">Count frequency</span><span class="val" id="rd-inv-freq">—</span></div>
+          <div class="result-line"><span class="lbl">Hours per count</span><span class="val" id="rd-inv-hours">—</span></div>
+          <div class="result-line"><span class="lbl">Properties</span><span class="val" id="rd-inv-props">—</span></div>
+          <div class="result-line"><span class="lbl">Staff hourly rate</span><span class="val">$18/hr</span></div>
+          <div class="result-line"><span class="lbl">Time reduction</span><span class="val green">50%</span></div>
         </div>
       </div>
 
       <div class="result-card">
         <div class="result-card-header">
-          <div class="result-card-title"><span class="result-card-icon">🍽️</span> Food cost visibility</div>
+          <div class="result-card-title">🍽️ Food Cost Visibility</div>
           <div class="result-card-saving" id="r-food-saving">$0</div>
         </div>
         <div class="result-card-body">
-          <div class="result-input-line">
-            <span class="label">Annual F&B revenue</span>
-            <span class="value" id="rd-fb-rev">—</span>
-          </div>
-          <div class="result-input-line">
-            <span class="label">Current food cost %</span>
-            <span class="value" id="rd-food-cost">—</span>
-          </div>
-          <div class="result-input-line">
-            <span class="label">Current recipe tracking</span>
-            <span class="value" id="rd-recipe">—</span>
-          </div>
-          <div class="result-input-line">
-            <span class="label">Chef price visibility</span>
-            <span class="value" id="rd-chef-vis">—</span>
-          </div>
-          <div class="result-input-line">
-            <span class="label">Est. food cost improvement</span>
-            <span class="value" style="color:var(--green)" id="rd-food-imp">1.5 pts</span>
-          </div>
+          <div class="result-line"><span class="lbl">Annual F&amp;B revenue</span><span class="val" id="rd-fb-rev">—</span></div>
+          <div class="result-line"><span class="lbl">Current food cost %</span><span class="val" id="rd-food-cost">32%</span></div>
+          <div class="result-line"><span class="lbl">Est. food cost improvement</span><span class="val green" id="rd-food-imp">1.5 pts</span></div>
+          <div class="result-line"><span class="lbl">Margin recovered</span><span class="val green" id="rd-food-margin">—</span></div>
         </div>
       </div>
 
@@ -1234,69 +457,43 @@
       <div class="assumptions-body" id="assumptions-body">
 
         <div class="assumption-row">
-          <div class="assumption-label">
-            Time per invoice — today
-            <span>Reeco's benchmark: 8.4 min average</span>
-          </div>
-          <div class="assumption-control">
-            <input class="assumption-input" type="number" id="a-invoice-time" value="8.4" step="0.5" min="1" max="20" oninput="recalc()">
-            <span class="assumption-unit">min</span>
-          </div>
+          <div class="assumption-label">AP staff fully-loaded hourly rate<span>Based on $90,000/yr salary + benefits ÷ 2,080 hrs</span></div>
+          <div class="assumption-control"><input class="assumption-input" type="number" id="a-ap-wage" value="43.27" step="0.5" min="20" max="100" oninput="recalc()"><span class="assumption-unit">$/hr</span></div>
         </div>
 
         <div class="assumption-row">
-          <div class="assumption-label">
-            Order cost reduction
-            <span>Reeco reports up to 19% via AI supplier matching</span>
-          </div>
-          <div class="assumption-control">
-            <input class="assumption-input" type="number" id="a-order-savings" value="10" step="1" min="5" max="19" oninput="recalc()">
-            <span class="assumption-unit">%</span>
-          </div>
+          <div class="assumption-label">Time per invoice — today<span>Reeco's published benchmark for manual processing</span></div>
+          <div class="assumption-control"><input class="assumption-input" type="number" id="a-invoice-time" value="8.4" step="0.5" min="1" max="20" oninput="recalc()"><span class="assumption-unit">min</span></div>
         </div>
 
         <div class="assumption-row">
-          <div class="assumption-label">
-            Inventory counting time reduction
-            <span>Reeco benchmark: 50% faster with mobile AI scanning</span>
-          </div>
-          <div class="assumption-control">
-            <input class="assumption-input" type="number" id="a-inv-savings" value="50" step="5" min="25" max="75" oninput="recalc()">
-            <span class="assumption-unit">%</span>
-          </div>
+          <div class="assumption-label">Order cost reduction<span>Reeco reports up to 19% via AI supplier matching. We use a conservative 10%.</span></div>
+          <div class="assumption-control"><input class="assumption-input" type="number" id="a-order-savings" value="10" step="1" min="5" max="19" oninput="recalc()"><span class="assumption-unit">%</span></div>
         </div>
 
         <div class="assumption-row">
-          <div class="assumption-label">
-            Food cost % improvement
-            <span>Estimated reduction from real-time recipe cost visibility</span>
-          </div>
-          <div class="assumption-control">
-            <input class="assumption-input" type="number" id="a-food-imp" value="1.5" step="0.5" min="0.5" max="3" oninput="recalc()">
-            <span class="assumption-unit">pts</span>
-          </div>
+          <div class="assumption-label">Inventory counting time reduction<span>Reeco benchmark: 50% faster with AI mobile scanning</span></div>
+          <div class="assumption-control"><input class="assumption-input" type="number" id="a-inv-savings" value="50" step="5" min="25" max="75" oninput="recalc()"><span class="assumption-unit">%</span></div>
         </div>
 
         <div class="assumption-row">
-          <div class="assumption-label">
-            Ordering time reduction
-            <span>Time saved placing & following up on orders</span>
-          </div>
-          <div class="assumption-control">
-            <input class="assumption-input" type="number" id="a-order-time" value="80" step="5" min="50" max="90" oninput="recalc()">
-            <span class="assumption-unit">%</span>
-          </div>
+          <div class="assumption-label">Inventory staff hourly rate<span>Estimated average for warehouse/floor staff in hospitality</span></div>
+          <div class="assumption-control"><input class="assumption-input" type="number" id="a-inv-wage" value="18" step="1" min="12" max="40" oninput="recalc()"><span class="assumption-unit">$/hr</span></div>
         </div>
 
         <div class="assumption-row">
-          <div class="assumption-label">
-            Purchasing staff hourly rate
-            <span>Used to calculate ordering labor savings</span>
-          </div>
-          <div class="assumption-control">
-            <input class="assumption-input" type="number" id="a-purch-wage" value="20" step="1" min="12" max="60" oninput="recalc()">
-            <span class="assumption-unit">$/hr</span>
-          </div>
+          <div class="assumption-label">Food cost % (current)<span>Industry average for hotel F&amp;B operations</span></div>
+          <div class="assumption-control"><input class="assumption-input" type="number" id="a-food-cost" value="32" step="0.5" min="20" max="45" oninput="recalc()"><span class="assumption-unit">%</span></div>
+        </div>
+
+        <div class="assumption-row">
+          <div class="assumption-label">Food cost improvement with Reeco<span>Estimated reduction from real-time recipe costing &amp; price visibility</span></div>
+          <div class="assumption-control"><input class="assumption-input" type="number" id="a-food-imp" value="1.5" step="0.5" min="0.5" max="3" oninput="recalc()"><span class="assumption-unit">pts</span></div>
+        </div>
+
+        <div class="assumption-row">
+          <div class="assumption-label">Annual F&amp;B revenue<span>Used to calculate food cost margin recovery</span></div>
+          <div class="assumption-control"><input class="assumption-input" type="number" id="a-fb-revenue" value="0" step="100000" min="0" oninput="recalc()"><span class="assumption-unit">$</span></div>
         </div>
 
       </div>
@@ -1305,7 +502,7 @@
     <div class="actions-bar">
       <button class="btn btn-ghost btn-lg" onclick="showForm()">← Edit inputs</button>
       <button class="btn btn-primary btn-lg" onclick="window.print()">⬇ Download PDF</button>
-      <button class="btn btn-navy btn-lg" onclick="alert('In production: this would open your HubSpot booking link or send an email to your team.')">Schedule a demo</button>
+      <button class="btn btn-navy btn-lg">Schedule a demo</button>
     </div>
 
   </div>
@@ -1313,24 +510,14 @@
 
 <script>
 let currentStep = 0;
-const totalSteps = 5;
+const totalSteps = 4;
+const freqLabels = {'52':'Weekly','26':'Bi-weekly','12':'Monthly'};
 
-const systemLabels = {
-  excel: 'Excel / spreadsheets',
-  portals: 'Multiple vendor portals',
-  email: 'Email & phone',
-  software: 'Existing software',
-  mix: 'Mix of methods'
-};
-
-const recipeLabels = {
-  none: 'Not tracked',
-  manual: 'Manual / memory',
-  excel: 'Excel',
-  software: 'Dedicated software'
-};
-
-const freqLabels = { '52': 'Weekly', '26': 'Bi-weekly', '12': 'Monthly' };
+function v(id) { const el = document.getElementById(id); return el ? el.value.trim() : ''; }
+function n(id, fallback) { const val = parseFloat(v(id)); return isNaN(val) ? (fallback || 0) : val; }
+function radioVal(name) { const el = document.querySelector('input[name="' + name + '"]:checked'); return el ? el.value : ''; }
+function fmt(num) { return '$' + Math.round(num).toLocaleString(); }
+function fmtNum(num) { return Math.round(num).toLocaleString(); }
 
 function nextStep() {
   if (currentStep < totalSteps - 1) {
@@ -1370,28 +557,122 @@ function showForm() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function v(id) {
-  const el = document.getElementById(id);
-  if (!el) return '';
-  return el.value.trim();
+function showResults() {
+  document.getElementById('screen-form').classList.remove('active');
+  document.getElementById('screen-results').classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  populateResults();
+  recalc();
+  submitToHubSpot();
 }
 
-function n(id, fallback) {
-  const val = parseFloat(v(id));
-  return isNaN(val) ? (fallback || 0) : val;
+function populateResults() {
+  const name = v('f-name') || 'Your Hotel Group';
+  document.getElementById('r-property-name').textContent = name + ' — ROI Overview';
+
+  const props = n('f-properties', 1);
+  const invoices = n('f-invoices', 0);
+  const vendors = n('f-vendors', 0);
+  const spend = n('f-spend', 0);
+  const invFreq = radioVal('inv-freq');
+
+  document.getElementById('r-s-properties').textContent = props || '—';
+  document.getElementById('r-s-invoices').textContent = invoices ? fmtNum(invoices) + '/mo' : '—';
+  document.getElementById('r-s-vendors').textContent = vendors || '—';
+  document.getElementById('r-s-spend').textContent = spend ? '$' + (spend/1000000).toFixed(1) + 'M' : '—';
+  document.getElementById('r-s-invfreq').textContent = freqLabels[invFreq] || '—';
+
+  document.getElementById('rd-invoices').textContent = invoices ? fmtNum(invoices) + '/mo' : '—';
+  document.getElementById('rd-ap-staff').textContent = n('f-ap-staff', 0) ? n('f-ap-staff', 0) + ' people' : '—';
+  document.getElementById('rd-spend').textContent = spend ? fmt(spend) : '—';
+  document.getElementById('rd-vendors').textContent = vendors ? vendors + ' suppliers' : '—';
+  document.getElementById('rd-stockout').textContent = radioVal('stockout') || '—';
+  document.getElementById('rd-inv-freq').textContent = freqLabels[invFreq] || '—';
+  document.getElementById('rd-inv-hours').textContent = n('f-inv-hours', 0) ? n('f-inv-hours', 0) + ' hrs' : '—';
+  document.getElementById('rd-inv-props').textContent = props ? props + ' properties' : '—';
 }
 
-function radioVal(name) {
-  const el = document.querySelector('input[name="' + name + '"]:checked');
-  return el ? el.value : '';
+function recalc() {
+  const apWage = n('a-ap-wage', 43.27);
+  const invoiceTime = n('a-invoice-time', 8.4);
+  const orderSavingsPct = n('a-order-savings', 10) / 100;
+  const invSavingsPct = n('a-inv-savings', 50) / 100;
+  const invWage = n('a-inv-wage', 18);
+  const foodCostPct = n('a-food-cost', 32);
+  const foodImp = n('a-food-imp', 1.5) / 100;
+  const fbRevenue = n('a-fb-revenue', 0);
+
+  // AP SAVINGS
+  const invoices = n('f-invoices', 0);
+  const reecoTime = 72 / 60;
+  const timeSaved = Math.max(0, invoiceTime - reecoTime);
+  const apSaving = (invoices * timeSaved / 60) * apWage * 12;
+  const apHours = (invoices * timeSaved / 60) * 12;
+  const apEff = invoiceTime > 0 ? Math.round((timeSaved / invoiceTime) * 100) : 86;
+
+  // PURCHASING SAVINGS
+  const spend = n('f-spend', 0);
+  const purchSaving = spend * orderSavingsPct;
+
+  // INVENTORY SAVINGS
+  const props = n('f-properties', 1) || 1;
+  const invFreqVal = parseFloat(radioVal('inv-freq')) || 12;
+  const invHours = n('f-inv-hours', 0);
+  const invSaving = invHours * invSavingsPct * invWage * invFreqVal * props;
+  const invHoursSaved = invHours * invSavingsPct * invFreqVal * props;
+
+  // FOOD COST SAVINGS
+  const foodSaving = fbRevenue * foodImp;
+
+  // TOTALS
+  const total = apSaving + purchSaving + invSaving + foodSaving;
+  const totalHours = apHours + invHoursSaved;
+
+  // UPDATE UI
+  document.getElementById('r-ap-saving').textContent = fmt(apSaving);
+  document.getElementById('r-purch-saving').textContent = fmt(purchSaving);
+  document.getElementById('r-inv-saving').textContent = fmt(invSaving);
+  document.getElementById('r-food-saving').textContent = fmt(foodSaving);
+  document.getElementById('r-total-savings').textContent = fmt(total);
+  document.getElementById('r-hours-saved').textContent = fmtNum(totalHours) + ' hrs';
+  document.getElementById('rd-ap-eff').textContent = apEff + '%';
+  document.getElementById('rd-ap-before').textContent = invoiceTime + ' min';
+  document.getElementById('rd-cost-red').textContent = Math.round(orderSavingsPct * 100) + '%';
+  document.getElementById('rd-ap-wage').textContent = '$' + apWage.toFixed(2) + '/hr';
+  document.getElementById('rd-food-cost').textContent = foodCostPct + '%';
+  document.getElementById('rd-food-imp').textContent = n('a-food-imp', 1.5) + ' pts';
+  document.getElementById('rd-food-margin').textContent = fbRevenue ? fmt(foodSaving) : 'Enter F&B revenue →';
+  document.getElementById('rd-fb-rev').textContent = fbRevenue ? fmt(fbRevenue) : 'See assumptions below';
+
+  const reecoCost = n('r-reeco-cost', 0);
+  if (reecoCost > 0) {
+    const paybackMonths = reecoCost / (total / 12);
+    document.getElementById('r-payback').textContent = paybackMonths < 12
+      ? Math.round(paybackMonths) + ' months'
+      : (paybackMonths / 12).toFixed(1) + ' years';
+  } else {
+    document.getElementById('r-payback').textContent = 'Enter cost →';
+  }
 }
 
-function fmt(num) {
-  return '$' + Math.round(num).toLocaleString();
+function toggleAssumptions() {
+  const body = document.getElementById('assumptions-body');
+  const label = document.getElementById('assumptions-toggle-label');
+  body.classList.toggle('open');
+  label.textContent = body.classList.contains('open') ? 'Hide ▴' : 'Show ▾';
 }
 
-function fmtNum(num) {
-  return Math.round(num).toLocaleString();
+function showToast(message, type) {
+  const existing = document.getElementById('hs-toast');
+  if (existing) existing.remove();
+  const toast = document.createElement('div');
+  toast.id = 'hs-toast';
+  toast.textContent = message;
+  toast.style.cssText = 'position:fixed;bottom:24px;right:24px;z-index:9999;background:' +
+    (type === 'success' ? '#1B7A42' : '#A32D2D') +
+    ';color:white;padding:12px 20px;border-radius:8px;font-family:DM Sans,sans-serif;font-size:14px;font-weight:500;box-shadow:0 4px 16px rgba(0,0,0,0.15);';
+  document.body.appendChild(toast);
+  setTimeout(function() { if (toast.parentNode) toast.remove(); }, 4000);
 }
 
 function submitToHubSpot() {
@@ -1404,29 +685,19 @@ function submitToHubSpot() {
   const firstName = nameParts[0] || 'Unknown';
   const lastName = nameParts.slice(1).join(' ') || '';
   const email = v('f-email') || ('roi-demo-' + Date.now() + '@reeco-calc.io');
-
-  const invFreqLabel = {'52':'Weekly','26':'Bi-weekly','12':'Monthly'}[radioVal('inv-freq')] || '';
-  const systemLabel = {excel:'Excel/spreadsheets',portals:'Multiple vendor portals',email:'Email & phone',software:'Existing software',mix:'Mix of methods'}[v('f-current-system')] || '';
+  const invFreqLabel = freqLabels[radioVal('inv-freq')] || '';
 
   const roiMessage =
-    'Properties: ' + v('f-properties') + ' | ' +
-    'Rooms: ' + v('f-rooms') + ' | ' +
-    'Current system: ' + systemLabel + ' | ' +
-    'Invoices/mo: ' + v('f-invoices') + ' | ' +
-    'AP staff: ' + v('f-ap-staff') + ' | ' +
-    'AP wage: ' + (v('f-ap-wage') || '22') + ' | ' +
-    'AP capacity: ' + radioVal('ap-cap') + ' | ' +
-    'Annual spend: ' + v('f-spend') + ' | ' +
-    'Order hrs/wk: ' + v('f-order-hours') + ' | ' +
-    'Vendors: ' + v('f-vendors') + ' | ' +
-    'Stockouts: ' + radioVal('stockout') + ' | ' +
-    'Inv hours/count: ' + v('f-inv-hours') + ' | ' +
-    'Inv wage: ' + (v('f-inv-wage') || '18') + ' | ' +
-    'Inv freq: ' + invFreqLabel + ' | ' +
-    'F&B revenue: ' + v('f-fb-revenue') + ' | ' +
-    'Food cost %: ' + (v('f-food-cost') || '32') + ' | ' +
-    'Recipe tracking: ' + v('f-recipe-tracking') + ' | ' +
-    'Chef visibility: ' + radioVal('chef-vis');
+    'Properties: ' + v('f-properties') +
+    ' | Invoices/mo: ' + v('f-invoices') +
+    ' | AP staff: ' + v('f-ap-staff') +
+    ' | AP capacity: ' + radioVal('ap-cap') +
+    ' | Annual spend: $' + v('f-spend') +
+    ' | Active vendors: ' + v('f-vendors') +
+    ' | Stockouts: ' + radioVal('stockout') +
+    ' | Inv count freq: ' + invFreqLabel +
+    ' | Inv hours/count: ' + v('f-inv-hours') +
+    ' | Inv method: ' + radioVal('inv-method');
 
   const payload = {
     fields: [
@@ -1450,155 +721,17 @@ function submitToHubSpot() {
   })
   .then(function(res) { return res.json(); })
   .then(function(data) {
-    if (data.inlineMessage || data.redirectUri) {
+    if (data.inlineMessage !== undefined) {
       showToast('✓ Contact saved to HubSpot CRM', 'success');
     } else {
-      console.error('HubSpot Forms response:', data);
+      console.error('HubSpot response:', data);
       showToast('HubSpot sync issue — see console', 'error');
     }
   })
   .catch(function(err) {
-    console.error('HubSpot fetch error:', err);
+    console.error('HubSpot error:', err);
     showToast('HubSpot connection failed', 'error');
   });
-}
-
-function showToast(message, type) {
-  const existing = document.getElementById('hs-toast');
-  if (existing) existing.remove();
-  const toast = document.createElement('div');
-  toast.id = 'hs-toast';
-  toast.textContent = message;
-  toast.style.cssText = `
-    position: fixed; bottom: 24px; right: 24px; z-index: 9999;
-    background: ${type === 'success' ? '#1B7A42' : '#A32D2D'};
-    color: white; padding: 12px 20px; border-radius: 8px;
-    font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-    animation: slideIn 0.3s ease;
-  `;
-  document.body.appendChild(toast);
-  setTimeout(() => { if (toast.parentNode) toast.remove(); }, 4000);
-}
-
-function showResults() {
-  document.getElementById('screen-form').classList.remove('active');
-  document.getElementById('screen-results').classList.add('active');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-  populateResults();
-  recalc();
-  submitToHubSpot();
-}
-
-function populateResults() {
-  const name = v('f-name') || 'Your Hotel Group';
-  document.getElementById('r-property-name').textContent = name + ' — ROI Overview';
-
-  const props = n('f-properties', 1);
-  const rooms = n('f-rooms', 0);
-  const vendors = n('f-vendors', 0);
-  const invoices = n('f-invoices', 0);
-  const systemKey = v('f-current-system');
-
-  document.getElementById('r-s-properties').textContent = props || '—';
-  document.getElementById('r-s-rooms').textContent = rooms || '—';
-  document.getElementById('r-s-vendors').textContent = vendors || '—';
-  document.getElementById('r-s-invoices').textContent = invoices || '—';
-  document.getElementById('r-s-system').textContent = systemLabels[systemKey] || '—';
-
-  document.getElementById('rd-invoices').textContent = invoices ? fmtNum(invoices) + '/mo' : '—';
-  document.getElementById('rd-ap-staff').textContent = n('f-ap-staff', 0) ? n('f-ap-staff', 0) + ' people' : '—';
-  document.getElementById('rd-ap-wage').textContent = '$' + (n('f-ap-wage', 22)) + '/hr';
-
-  const spend = n('f-spend', 0);
-  document.getElementById('rd-spend').textContent = spend ? fmt(spend) : '—';
-  document.getElementById('rd-order-hours').textContent = n('f-order-hours', 0) ? n('f-order-hours', 0) + ' hrs/wk' : '—';
-  document.getElementById('rd-vendors').textContent = vendors ? vendors + ' suppliers' : '—';
-
-  const invFreq = radioVal('inv-freq');
-  document.getElementById('rd-inv-freq').textContent = freqLabels[invFreq] || '—';
-  document.getElementById('rd-inv-hours').textContent = n('f-inv-hours', 0) ? n('f-inv-hours', 0) + ' hrs/count' : '—';
-  document.getElementById('rd-inv-props').textContent = props ? props + ' properties' : '—';
-  document.getElementById('rd-inv-wage').textContent = '$' + n('f-inv-wage', 18) + '/hr';
-
-  const fbRev = n('f-fb-revenue', 0);
-  document.getElementById('rd-fb-rev').textContent = fbRev ? fmt(fbRev) : '—';
-  document.getElementById('rd-food-cost').textContent = n('f-food-cost', 32) + '%';
-
-  const recipeKey = v('f-recipe-tracking');
-  document.getElementById('rd-recipe').textContent = recipeLabels[recipeKey] || '—';
-
-  const chefVis = radioVal('chef-vis');
-  document.getElementById('rd-chef-vis').textContent = chefVis === 'yes' ? 'Yes' : chefVis === 'no' ? 'No' : chefVis === 'partial' ? 'Partially' : '—';
-}
-
-function recalc() {
-  const invoiceTime = n('a-invoice-time', 8.4);
-  const orderSavingsPct = n('a-order-savings', 10) / 100;
-  const invSavingsPct = n('a-inv-savings', 50) / 100;
-  const foodImp = n('a-food-imp', 1.5) / 100;
-  const orderTimePct = n('a-order-time', 80) / 100;
-  const purchWage = n('a-purch-wage', 20);
-
-  const invoices = n('f-invoices', 0);
-  const apWage = n('f-ap-wage', 22) || 22;
-  const reecoInvoiceTime = 72 / 60;
-  const timeSavedPerInvoice = Math.max(0, invoiceTime - reecoInvoiceTime);
-  const apSaving = (invoices * timeSavedPerInvoice / 60) * apWage * 12;
-  const apEffPct = invoiceTime > 0 ? Math.round((timeSavedPerInvoice / invoiceTime) * 100) : 86;
-
-  const spend = n('f-spend', 0);
-  const orderHours = n('f-order-hours', 0);
-  const costSaving = spend * orderSavingsPct;
-  const laborSaving = orderHours * orderTimePct * purchWage * 52;
-  const purchSaving = costSaving + laborSaving;
-
-  const props = n('f-properties', 1) || 1;
-  const invFreqVal = parseFloat(radioVal('inv-freq')) || 12;
-  const invHours = n('f-inv-hours', 0);
-  const invWage = n('f-inv-wage', 18) || 18;
-  const invSaving = invHours * invSavingsPct * invWage * invFreqVal * props;
-
-  const fbRev = n('f-fb-revenue', 0);
-  const foodCostPct = n('f-food-cost', 32) / 100 || 0.32;
-  const foodSaving = fbRev * foodImp;
-
-  const total = apSaving + purchSaving + invSaving + foodSaving;
-
-  const apHours = (invoices * timeSavedPerInvoice / 60) * 12;
-  const purchHours = orderHours * orderTimePct * 52;
-  const invHoursTotal = invHours * invSavingsPct * invFreqVal * props;
-  const totalHours = apHours + purchHours + invHoursTotal;
-
-  document.getElementById('r-ap-saving').textContent = fmt(apSaving);
-  document.getElementById('r-purch-saving').textContent = fmt(purchSaving);
-  document.getElementById('r-inv-saving').textContent = fmt(invSaving);
-  document.getElementById('r-food-saving').textContent = fmt(foodSaving);
-  document.getElementById('r-total-savings').textContent = fmt(total);
-  document.getElementById('r-hours-saved').textContent = fmtNum(totalHours) + ' hrs';
-
-  document.getElementById('rd-ap-eff').textContent = apEffPct + '%';
-  document.getElementById('rd-ap-before').textContent = invoiceTime + ' min';
-  document.getElementById('rd-cost-red').textContent = Math.round(orderSavingsPct * 100) + '%';
-  document.getElementById('rd-food-imp').textContent = n('a-food-imp', 1.5) + ' pts';
-
-  const reecoCost = n('r-reeco-cost', 0);
-  if (reecoCost > 0) {
-    const net = total - reecoCost;
-    const paybackMonths = reecoCost / (total / 12);
-    document.getElementById('r-payback').textContent = paybackMonths < 12
-      ? Math.round(paybackMonths) + ' months'
-      : (paybackMonths / 12).toFixed(1) + ' years';
-  } else {
-    document.getElementById('r-payback').textContent = 'Enter cost →';
-  }
-}
-
-function toggleAssumptions() {
-  const body = document.getElementById('assumptions-body');
-  const label = document.getElementById('assumptions-toggle-label');
-  body.classList.toggle('open');
-  label.textContent = body.classList.contains('open') ? 'Hide ▴' : 'Show ▾';
 }
 
 document.getElementById('btn-next').onclick = nextStep;
