@@ -220,8 +220,12 @@
             <input type="text" id="f-name" placeholder="e.g. Sunrise Hotel Group">
           </div>
           <div class="field-group">
-            <label>Your name &amp; title</label>
-            <input type="text" id="f-contact" placeholder="e.g. Maria Lopez, VP Operations">
+            <label>Your full name</label>
+            <input type="text" id="f-contact" placeholder="e.g. Maria Lopez">
+          </div>
+          <div class="field-group">
+            <label>Your job title</label>
+            <input type="text" id="f-title" placeholder="e.g. VP Operations">
           </div>
         </div>
         <div class="field-group">
@@ -253,14 +257,7 @@
           <input type="number" id="f-ap-staff" placeholder="e.g. 2" min="1" oninput="this.value=this.value.replace(/[^0-9]/g,'')">
           <div class="field-hint">Include all staff across all properties who touch invoice coding and entry</div>
         </div>
-        <div class="field-group">
-          <label>Is your AP team at full capacity or backlogged?</label>
-          <div class="radio-group">
-            <div class="radio-option"><input type="radio" name="ap-cap" id="ap-cap-yes" value="yes"><label for="ap-cap-yes">Yes, always behind</label></div>
-            <div class="radio-option"><input type="radio" name="ap-cap" id="ap-cap-some" value="sometimes"><label for="ap-cap-some">Sometimes</label></div>
-            <div class="radio-option"><input type="radio" name="ap-cap" id="ap-cap-no" value="no"><label for="ap-cap-no">No, manageable</label></div>
-          </div>
-        </div>
+
       </div>
     </div>
 
@@ -681,9 +678,10 @@ function submitToHubSpot() {
   const endpoint = 'https://api.hsforms.com/submissions/v3/integration/submit/' + portalId + '/' + formId;
 
   const contactName = v('f-contact') || '';
-  const nameParts = contactName.split(' ');
+  const nameParts = contactName.trim().split(' ');
   const firstName = nameParts[0] || 'Unknown';
   const lastName = nameParts.slice(1).join(' ') || '';
+  const jobTitle = v('f-title') || '';
   const email = v('f-email') || ('roi-demo-' + Date.now() + '@reeco-calc.io');
   const invFreqLabel = freqLabels[radioVal('inv-freq')] || '';
 
@@ -705,7 +703,7 @@ function submitToHubSpot() {
       { name: 'lastname', value: lastName },
       { name: 'email', value: email },
       { name: 'company', value: v('f-name') || '' },
-      { name: 'jobtitle', value: v('f-contact') || '' },
+      { name: 'jobtitle', value: jobTitle },
       { name: 'message', value: roiMessage }
     ],
     context: {
