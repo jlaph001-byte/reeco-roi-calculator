@@ -704,7 +704,16 @@ function submitToHubSpot() {
       { name: 'email', value: email },
       { name: 'company', value: v('f-name') || '' },
       { name: 'jobtitle', value: jobTitle },
-      { name: 'message', value: roiMessage }
+      { name: 'message', value: roiMessage },
+      { name: 'reeco_num_properties', value: v('f-properties') || '' },
+      { name: 'reeco_monthly_invoices', value: v('f-invoices') || '' },
+      { name: 'reeco_ap_staff', value: v('f-ap-staff') || '' },
+      { name: 'reeco_annual_spend', value: v('f-spend') || '' },
+      { name: 'reeco_active_vendors', value: v('f-vendors') || '' },
+      { name: 'reeco_stockouts', value: radioVal('stockout') || '' },
+      { name: 'reeco_inv_freq', value: invFreqLabel || '' },
+      { name: 'reeco_inv_hours', value: v('f-inv-hours') || '' },
+      { name: 'inventory_tracking_method', value: radioVal('inv-method') || '' }
     ],
     context: {
       pageUri: 'jlaph001-byte.github.io/reeco-roi-calculator',
